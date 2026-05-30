@@ -23,8 +23,8 @@ func main() {
 	DB = db
 
 	app := fiber.New()
-	app.Use(recover.New())
-	app.Use(logger.New())
+	// app.Use(recover.New())
+	// app.Use(logger.New())
 
 	fmt.Print("Hellow world My program is running")
 
