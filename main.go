@@ -6,32 +6,22 @@ import (
 	"github.com/gofiber/fiber/v3"
 	"github.com/gofiber/fiber/v3/middleware/logger"
 	"github.com/gofiber/fiber/v3/middleware/recover"
-	// "github.com/gofiber/fiber/v3/middleware/static"
-	"gorm.io/driver/postgres"
-	"gorm.io/gorm"
+
+	"gootmplhtmx/Route"
+	"gootmplhtmx/database"
 )
-
-var DB *gorm.DB
-var APP *fiber.App
-
 func main() {
-	// GORM PostgreSQL connection
-	dsn := "host=localhost user=postgres password=0909 dbname=Rag-System port=5432 sslmode=disable"
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
-	if err != nil {
-		log.Fatal("Failed to connect to database:", err)
+	if _, err := database.DbLoad(); err != nil {
+		log.Fatal(err)
 	}
-	DB = db
 
 	// Create Fiber app with v3
-	app := fiber.New()
-	APP = app
+	APP := fiber.New()
 
 	// Add middleware
-	app.Use(logger.New())
-	app.Use(recover.New())
+	APP.Use(logger.New())
+	APP.Use(recover.New())
+	Route.Routing(APP)
 
-	// Serve static files
-	
-	log.Fatal(app.Listen(":3000"))
+	log.Fatal(APP.Listen(":3000"))
 }
