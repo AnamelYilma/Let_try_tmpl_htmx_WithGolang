@@ -12,8 +12,13 @@ Tailwind CSS - Styling
 ────────────────────────────────────────────────────────────────────────────────
 
 
-├── templete/
-│   └── index.html
+
+├── Route/
+│   └── Rout.go
+├── database/
+├── view/
+│   ├── compnenet.templ
+│   └── list.templ
 ├── .gitattributes
 ├── .gitignore
 ├── app.templ
@@ -22,6 +27,7 @@ Tailwind CSS - Styling
 ├── main.go
 ├── package-lock.json
 ├── package.json
+├── plane of project.txt
 ├── tailwind.config.js
 └── tools.go
 
@@ -31,4 +37,5 @@ Tailwind CSS - Styling
 Routh
 get / is to take that mean to  display all todod
 post /add is to add and to take full update list
-post /delet is to delete and to updte list that mean by remove that delete
+path /delet is to delete and to updte list that mean by remove that delete
+PATCH /edit is to edit already todo list
