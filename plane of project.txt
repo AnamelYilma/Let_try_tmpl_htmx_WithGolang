@@ -26,3 +26,9 @@ Tailwind CSS - Styling
 └── tools.go
 
 ────────────────────────────────────────────────────────────────────────────────
+
+
+Routh
+get / is to take that mean to  display all todod
+post /add is to add and to take full update list
+post /delet is to delete and to updte list that mean by remove that delete
