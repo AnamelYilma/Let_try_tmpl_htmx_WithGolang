@@ -1,0 +1,28 @@
+project name : Let_try_tmpl_htmx_WithGolang
+Root path: c:\continer\work\code\Learn Golang\Let_try_tmpl_htmx_WithGolang
+
+
+My project is to make using : templ , htmx, go , gorm , fiber , tailwind
+
+Templ - Type-safe HTML templates that compile to Go (like JSX but for Go)
+HTMX - For dynamic interactions
+Fiber - Web framework
+GORM - Database ORM
+Tailwind CSS - Styling
+────────────────────────────────────────────────────────────────────────────────
+
+
+├── templete/
+│   └── index.html
+├── .gitattributes
+├── .gitignore
+├── app.templ
+├── go.mod
+├── go.sum
+├── main.go
+├── package-lock.json
+├── package.json
+├── tailwind.config.js
+└── tools.go
+
+────────────────────────────────────────────────────────────────────────────────
