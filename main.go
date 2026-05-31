@@ -6,7 +6,7 @@ import (
 	"github.com/gofiber/fiber/v3"
 	"github.com/gofiber/fiber/v3/middleware/logger"
 	"github.com/gofiber/fiber/v3/middleware/recover"
-	"github.com/gofiber/fiber/v3/middleware/static"
+	// "github.com/gofiber/fiber/v3/middleware/static"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -30,21 +30,6 @@ func main() {
 	app.Use(recover.New())
 
 	// Serve static files
-	app.Use("/css", static.New(static.Config{
-		Root: "./css",
-	}))
-	app.Use("/js", static.New(static.Config{
-		Root: "./node_modules/htmx.org/dist",
-	}))
-
-	// Routes
-	app.Get("/", func(c fiber.Ctx) error {
-		return Page().Render(c.Context(), c.Response().BodyWriter())
-	})
-
-	app.Post("/clicked", func(c fiber.Ctx) error {
-		return ClickedResponse().Render(c.Context(), c.Response().BodyWriter())
-	})
-
+	
 	log.Fatal(app.Listen(":3000"))
 }
