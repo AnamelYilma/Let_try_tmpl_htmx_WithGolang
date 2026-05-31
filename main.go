@@ -12,6 +12,7 @@ import (
 )
 
 var DB *gorm.DB
+var APP *fiber.App
 
 func main() {
 	// GORM PostgreSQL connection
@@ -24,6 +25,7 @@ func main() {
 
 	// Create Fiber app with v3
 	app := fiber.New()
+	APP = app
 
 	// Add middleware
 	app.Use(logger.New())
