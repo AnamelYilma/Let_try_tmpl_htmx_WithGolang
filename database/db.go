@@ -2,10 +2,11 @@ package database
 
 import (
 	"fmt"
-	"gootmplhtmx/Route"
+	// "gootmplhtmx/Route"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"gootmplhtmx/Model"
 )
 
 var DB *gorm.DB
