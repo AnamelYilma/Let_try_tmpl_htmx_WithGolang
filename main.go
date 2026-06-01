@@ -10,6 +10,7 @@ import (
 	"gootmplhtmx/Route"
 	"gootmplhtmx/database"
 )
+
 func main() {
 	if _, err := database.DbLoad(); err != nil {
 		log.Fatal(err)
@@ -21,6 +22,7 @@ func main() {
 	// Add middleware
 	APP.Use(logger.New())
 	APP.Use(recover.New())
+	APP.Static("/static", "./public")
 	Route.Routing(APP)
 
 	log.Fatal(APP.Listen(":3000"))
