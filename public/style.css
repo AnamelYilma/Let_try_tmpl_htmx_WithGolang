@@ -1,0 +1,53 @@
+@import "tailwindcss";
+*{
+    box-sizing: border-box;
+
+}
+body{
+    padding: 30px;
+    background: #efb9b92b;
+}
+
+:root{
+    --input-bg:#e6e6e6aa;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#inpt-box{
+    width: 300px;
+    height: 50px;
+    background-color:var( --input-bg);
+    font-size: large;
+    padding-left: 20px;
+    padding-right: 0px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    /* border: solid 2px rgba(0, 0, 0, 0.297); */
+
+}
+#inpt{
+    color: rgb(0, 0, 0);
+    opacity: 1;
+    background-color:transparent;
+    border: none;
+    outline: none;
+
+}
+#inpt-box button{
+    height: 50px;
+    width: 68px;
+    border-radius: 10px;
+    background-color: rgba(37, 37, 255, 0.781);
+    
+
+}
+.todoList{
+    border: solid 2px rgba(0, 0, 0, 0.23);
+    padding: 5px;
+    padding-left:10px ;
+    width: 300px;
+    border-radius: 5px;
+}
