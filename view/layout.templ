@@ -1,0 +1,21 @@
+package view
+
+import(
+    "gootmplhtmx/model"
+)
+
+templ Fulpage(title string, task []model.TASK) {
+    <!DOCTYPE html>
+    <html lang="en">
+        @header(title)
+        <body ><!-- Main container - centers everything -->
+            <div class="container"><!-- Inner container - controls width -->
+                <div class="in-container">   <!-- Input section - FULL WIDTH -->
+                    @inputbox() 
+                     <!-- Checkbox section -->
+                    @Listing(task)
+                </div>
+            </div>
+        </body>
+    </html>
+}
