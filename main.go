@@ -6,6 +6,7 @@ import (
 	"github.com/gofiber/fiber/v3"
 	"github.com/gofiber/fiber/v3/middleware/logger"
 	"github.com/gofiber/fiber/v3/middleware/recover"
+	"github.com/gofiber/fiber/v3/middleware/static"
 
 	"gootmplhtmx/Route"
 	"gootmplhtmx/database"
@@ -22,7 +23,7 @@ func main() {
 	// Add middleware
 	APP.Use(logger.New())
 	APP.Use(recover.New())
-	APP.Static("/static", "./public")
+	APP.Use("/static", static.New("./public"))
 	Route.Routing(APP)
 
 	log.Fatal(APP.Listen(":3000"))
