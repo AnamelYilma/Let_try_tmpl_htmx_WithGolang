@@ -36,19 +36,39 @@ func Routing(APP *fiber.App) {
 		text := c.FormValue("user-input")
 		task.Tasktx = text
 		if err:= database.DB.Create(task).Error; err != nil{
-		return c.Status(fiber.StatusInternalServerError ,err.Error())
+		return c.Status(fiber.StatusInternalServerError).SendString(err.Error())
 		}
 
-		// return c.SendStatus(fiber.StatusNotImplemented)
+		return c.Status(fiber.StatusAccepted).SendString("Added")
+	})
+
+
+
+	APP.Delete("/delete/:id", func(c fiber.Ctx) error {
+		var task model.TASK
+		id := c.Params("id")
+		database.DB.Delete(&task,id)
+		return c.Status(fiber.StatusAccepted).SendString("Deleted")
+		
 
 	})
 
-	// APP.Delete("/delete/:id", func(c fiber.Ctx) error {
-	// 	return c.SendStatus(fiber.StatusNotImplemented)
-	// })
+	APP.Patch("/edit/:task", func(c fiber.Ctx) error {
+		var task model.TASK
+		dbtx := c.Params("tasktx")
+		if err:= database.DB.First(&task,"id=?",dbtx).Error; err!=nil{
+			return c.Status(fiber.StatusNotFound).SendString("not found for edit")
+		}
+		if err:= database.DB.Delete(&task).Error; err != nil{
+			return c.Status(fiber.StatusNotFound).SendString("Can't update")
+		}
 
-	// APP.Patch("/edit/:id", func(c fiber.Ctx) error {
-	// 	return c.SendStatus(fiber.StatusNotImplemented)
-	// })
+		return c.SendString(`
+				<input type="text" placeholder="Type here..." id="inpt" name="user-input" value="`+task.Tasktx+`"  />
+		
+		`)
+
+
+	})
 	
 }
