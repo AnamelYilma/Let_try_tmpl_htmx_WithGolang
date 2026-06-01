@@ -2,7 +2,8 @@ package Route
 
 import (
 	"gootmplhtmx/database"
-	"gootmplhtmx/Model"
+	"gootmplhtmx/model"
+	"gootmplhtmx/view"
 
 	"github.com/gofiber/fiber/v3"
 )
@@ -18,12 +19,12 @@ var Db = database.DB
 func Routing(APP *fiber.App) {
 
 	APP.Get("/", func(c fiber.Ctx) error {
-		var tasks []Model.TASK
-		if err:= database.DB.Find(&tasks).Error; err != nil{
-			c.Status(500).SendString(err.Error())
+		var tasks []model.TASK
+		if err := database.DB.Find(&tasks).Error; err != nil {
+			return c.Status(500).SendString(err.Error())
 		}
 
-		return 
+		return view.Fulpage("Todo List", tasks).Render(c.Context(), c.Response().Writer())
 	})
 
 	// Placeholder endpoints so your structure is ready for server-side HTMX updates.
