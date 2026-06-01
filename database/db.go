@@ -10,7 +10,7 @@ import (
 )
 
 var DB *gorm.DB
-var task Model.TASK
+var task model.TASK
 
 func DbLoad() (*gorm.DB, error) {
 	dsn := "host=localhost user=postgres password=0909 dbname=Rag-System port=5432 sslmode=disable"
