@@ -1,7 +1,7 @@
-package Model
+package model
 
 type TASK struct {
-	ID     uint `gorm:"PrimaryKey"`
-	Tasktx string `gorm:"not null"`
-	status bool `gorm:"default:false"`
+	ID uint `gorm:"primaryKey" json:"id"`
+	Tasktx string `gorm:"not null" json:"tasktx"`
+	Status bool `gorm:"default:false" json:"status"`
 }
