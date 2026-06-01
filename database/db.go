@@ -6,7 +6,7 @@ import (
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-	"gootmplhtmx/Model"
+	"gootmplhtmx/model"
 )
 
 var DB *gorm.DB
