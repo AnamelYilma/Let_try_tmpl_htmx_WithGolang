@@ -8,7 +8,7 @@ templ Listing(tasks []model.TASK){
             for _,task := range tasks {
                 <div  class="todoList">
                     <input type="checkbox" class="checkbox1"  />
-                    <label for="checkbox1" class=" ">{task.Tasktx}</label>
+                    <label for="checkbox1" name="tasktx" class=" ">{task.Tasktx}</label>
             
                 </div>
             }
