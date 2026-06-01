@@ -1,0 +1,17 @@
+package view
+
+import "gootmplhtmx/model"
+
+templ Listing(tasks []model.TASK){
+    <div>
+        <div>
+            for _,task := range tasks {
+                <div  class="todoList">
+                    <input type="checkbox" class="checkbox1"  />
+                    <label for="checkbox1" class=" ">{task.Tasktx}</label>
+            
+                </div>
+            }
+        </div>
+    </div>
+}
