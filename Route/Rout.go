@@ -36,7 +36,7 @@ func Routing(APP *fiber.App) {
 		text := c.FormValue("user-input")
 		task.Tasktx = text
 		if err:= database.DB.Create(task).Error; err != nil{
-		return c.SendString("database is not accept ", err.Error())
+		return c.Status(fiber.StatusInternalServerError ,err.Error())
 		}
 
 		// return c.SendStatus(fiber.StatusNotImplemented)
