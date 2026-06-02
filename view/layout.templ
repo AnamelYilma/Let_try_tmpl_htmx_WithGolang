@@ -13,7 +13,9 @@ templ Fulpage(title string, task []model.TASK) {
                 <div class="in-container">   <!-- Input section - FULL WIDTH -->
                     @inputbox() 
                      <!-- Checkbox section -->
+                    <div id="list-container">
                     @Listing(task)
+                    </div>
                 </div>
             </div>
         </body>
