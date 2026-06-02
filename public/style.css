@@ -12,11 +12,15 @@ body{
     --input-bg:#e6e6e6aa;
 }
 .container{
+    width: 100dvw;
+    height: 100dvh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 #inpt-box{
+    display: flex;
+    justify-content: space-between;
     width: 300px;
     height: 50px;
     background-color:var( --input-bg);
@@ -45,9 +49,29 @@ body{
 
 }
 .todoList{
+    display: flex;
+    justify-content: space-between;
     border: solid 2px rgba(0, 0, 0, 0.23);
     padding: 5px;
     padding-left:10px ;
     width: 300px;
     border-radius: 5px;
+
+
+}
+.btnO{
+    background-color: rgba(156, 13, 13, 0.451);
+    padding-bottom: 3px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-radius: 5px;
+}
+.checkbox1{
+    cursor: pointer;
+
+}
+.todoListI{
+}
+.todoListO{
+
 }
