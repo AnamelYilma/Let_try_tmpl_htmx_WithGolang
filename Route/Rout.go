@@ -7,7 +7,7 @@ import (
 	"gootmplhtmx/view"
 
 	"github.com/gofiber/fiber/v3"
-	"golang.org/x/net/html"
+	// "golang.org/x/net/html"
 )
 
 /*
@@ -37,7 +37,8 @@ func Routing(APP *fiber.App) {
 		var task model.TASK
 		text := c.FormValue("user-input")
 		task.Tasktx = text
-		if err:= database.DB.Create(task).Error; err != nil{
+		task.Status = false
+		if err:= database.DB.Create(&task).Error; err != nil{
 		return c.Status(fiber.StatusInternalServerError).SendString(err.Error())
 		}
 		var tasks []model.TASK
@@ -50,7 +51,7 @@ func Routing(APP *fiber.App) {
 			return err
 		}
 
-		return c.Status(fiber.StatusAccepted).SendString("Added")
+		return c.Status(fiber.StatusOK).SendString("Added")
 	})
 
 
