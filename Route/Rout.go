@@ -18,7 +18,7 @@ PATCH /edit is to edit already todo list
 */
 
 func Routing(APP *fiber.App) {
-	
+
 	APP.Get("/", func(c fiber.Ctx) error {
 		var task []model.TASK
 		if err := database.DB.Find(&task).Error; err != nil {
@@ -29,6 +29,7 @@ func Routing(APP *fiber.App) {
 		if err := html.Render(c.Context(), &b); err != nil {
 			return err
 		}
+		c.Set(fiber.HeaderContentType, fiber.MIMETextHTML)
 		return c.Status(200).Send(b.Bytes())
 	})
 
@@ -38,49 +39,45 @@ func Routing(APP *fiber.App) {
 		text := c.FormValue("user-input")
 		task.Tasktx = text
 		task.Status = false
-		if err:= database.DB.Create(&task).Error; err != nil{
-		return c.Status(fiber.StatusInternalServerError).SendString(err.Error())
+		if err := database.DB.Create(&task).Error; err != nil {
+			return c.Status(fiber.StatusInternalServerError).SendString(err.Error())
 		}
 		var tasks []model.TASK
-		if err:= database.DB.Find(&tasks).Error; err != nil{
+		if err := database.DB.Find(&tasks).Error; err != nil {
 			return c.Status(500).SendString(err.Error())
 		}
 		var b bytes.Buffer
-		html:= view.Listing(tasks)
+		html := view.Listing(tasks)
 		if err := html.Render(c.Context(), &b); err != nil {
 			return err
 		}
-
+		c.Set(fiber.HeaderContentType, fiber.MIMETextHTML)
 		return c.Status(fiber.StatusOK).Send(b.Bytes())
 	})
-
-
 
 	APP.Delete("/delete/:id", func(c fiber.Ctx) error {
 		var task model.TASK
 		id := c.Params("id")
-		database.DB.Delete(&task,id)
-		return c.Status(fiber.StatusAccepted).SendString("Deleted")
-		
+		database.DB.Delete(&task, id)
+		return c.Status(200).SendString("delet")
 
 	})
 
 	APP.Patch("/edit/:task", func(c fiber.Ctx) error {
 		var task model.TASK
 		dbtx := c.Params("tasktx")
-		if err:= database.DB.First(&task,"id=?",dbtx).Error; err!=nil{
+		if err := database.DB.First(&task, "id=?", dbtx).Error; err != nil {
 			return c.Status(fiber.StatusNotFound).SendString("not found for edit")
 		}
-		if err:= database.DB.Delete(&task).Error; err != nil{
+		if err := database.DB.Delete(&task).Error; err != nil {
 			return c.Status(fiber.StatusNotFound).SendString("Can't update")
 		}
 
 		return c.SendString(`
-				<input type="text" placeholder="Type here..." id="inpt" name="user-input" value="`+task.Tasktx+`"  />
+				<input type="text" placeholder="Type here..." id="inpt" name="user-input" value="` + task.Tasktx + `"  />
 		
 		`)
 
-
 	})
-	
+
 }
