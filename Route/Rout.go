@@ -5,7 +5,9 @@ import (
 	"gootmplhtmx/database"
 	"gootmplhtmx/model"
 	"gootmplhtmx/view"
+
 	"github.com/gofiber/fiber/v3"
+	"golang.org/x/net/html"
 )
 
 /*
@@ -37,6 +39,15 @@ func Routing(APP *fiber.App) {
 		task.Tasktx = text
 		if err:= database.DB.Create(task).Error; err != nil{
 		return c.Status(fiber.StatusInternalServerError).SendString(err.Error())
+		}
+		var tasks []model.TASK
+		if err:= database.DB.Find(&tasks).Error; err != nil{
+			return c.Status(500).SendString(err.Error())
+		}
+		var b bytes.Buffer
+		html:= view.Fulpage("todolist" ,tasks)
+		if err := html.Render(c.Context(), &b); err != nil {
+			return err
 		}
 
 		return c.Status(fiber.StatusAccepted).SendString("Added")
