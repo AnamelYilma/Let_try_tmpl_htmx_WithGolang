@@ -5,13 +5,25 @@ import "gootmplhtmx/model"
 templ Listing(tasks []model.TASK){
     <div>
         <div>
+         if len(tasks) == 0{ 
+                <div  class="todoList">
+                    <label for="checkbox1" name="tasktx" class=" ">empty</label>
+            
+                </div>
+
+        }else {
+        
             for _,task := range tasks {
                 <div  class="todoList">
                     <input type="checkbox" class="checkbox1"  />
                     <label for="checkbox1" name="tasktx" class=" ">{task.Tasktx}</label>
+                    
             
                 </div>
             }
+        }
+        
+    
         </div>
     </div>
 }
