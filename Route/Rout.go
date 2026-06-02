@@ -46,12 +46,12 @@ func Routing(APP *fiber.App) {
 			return c.Status(500).SendString(err.Error())
 		}
 		var b bytes.Buffer
-		html:= view.Fulpage("todolist" ,tasks)
+		html:= view.Listing(tasks)
 		if err := html.Render(c.Context(), &b); err != nil {
 			return err
 		}
 
-		return c.Status(fiber.StatusOK).SendString("Added")
+		return c.Status(fiber.StatusOK).Send(b.Bytes())
 	})
 
 
