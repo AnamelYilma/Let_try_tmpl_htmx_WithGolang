@@ -29,7 +29,7 @@ func inputbox() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"\"><div id=\"inpt-box\"><input type=\"text\" placeholder=\"Type here...\" id=\"inpt\"> <button type=\"button\">ADD</button></div></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"\"><form hx-post=\"\\add\" id=\"inpt-box\" hx-trigger=\"submit\" hx-target=\"#list-container\" hx-swap=\"innerHTML\"><input type=\"text\" placeholder=\"Type here...\" id=\"inpt\" name=\"user-input\"> <button type=\"submit\">ADD</button></form></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
