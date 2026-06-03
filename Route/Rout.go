@@ -30,7 +30,7 @@ func Routing(APP *fiber.App) {
 			return err
 		}
 		c.Set(fiber.HeaderContentType, fiber.MIMETextHTML)
-		return c.Status(200).Send(b.Bytes())
+		return c.Status(200).SendString(b.String())
 	})
 
 	// Placeholder endpoints so your structure is ready for server-side HTMX updates.
