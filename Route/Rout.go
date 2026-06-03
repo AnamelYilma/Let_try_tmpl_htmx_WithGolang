@@ -34,6 +34,7 @@ func Routing(APP *fiber.App) {
 	})
 
 	// Placeholder endpoints so your structure is ready for server-side HTMX updates.
+	
 	APP.Post("/add", func(c fiber.Ctx) error {
 		var task model.TASK
 		text := c.FormValue("user-input")
@@ -54,7 +55,8 @@ func Routing(APP *fiber.App) {
 		c.Set(fiber.HeaderContentType, fiber.MIMETextHTML)
 		return c.Status(fiber.StatusOK).Send(b.Bytes())
 	})
-
+	
+	
 	APP.Delete("/delete/:id", func(c fiber.Ctx) error {
 		var task model.TASK
 		id := c.Params("id")
