@@ -10,9 +10,9 @@ import (
 )
 
 var DB *gorm.DB
-var task model.TASK
 
 func DbLoad() (*gorm.DB, error) {
+	var task model.TASK
 	dsn := "host=localhost user=postgres password=0909 dbname=serverside port=5432 sslmode=disable"
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
@@ -20,7 +20,7 @@ func DbLoad() (*gorm.DB, error) {
 	}
 	
 	DB = db
-	db.AutoMigrate(&model.TASK)
+	db.AutoMigrate(&task)
 
 	return db, nil
 }
