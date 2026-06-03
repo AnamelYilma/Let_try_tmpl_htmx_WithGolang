@@ -5,19 +5,18 @@ import(
 )
 
 templ Fulpage(title string, task []model.TASK) {
-    <!DOCTYPE html>
-    <html lang="en">
-        @header(title)
-        <body ><!-- Main container - centers everything -->
-            <div class="container"><!-- Inner container - controls width -->
-                <div class="in-container">   <!-- Input section - FULL WIDTH -->
-                    @inputbox() 
-                     <!-- Checkbox section -->
-                    <div id="list-container">
-                    @Listing(task)
-                    </div>
-                </div>
-            </div>
-        </body>
-    </html>
+	<!DOCTYPE html>
+	<html lang="en">
+		@header(title)
+		<body>
+			<div class="container">
+				<div class="in-container">
+					@inputbox()
+					<div id="list-container">
+						@Listing(task)
+					</div>
+				</div>
+			</div>
+		</body>
+	</html>
 }
