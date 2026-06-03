@@ -20,7 +20,7 @@ func DbLoad() (*gorm.DB, error) {
 	}
 	
 	DB = db
-	db.AutoMigrate(&task)
+	db.AutoMigrate(&model.TASK)
 
 	return db, nil
 }
