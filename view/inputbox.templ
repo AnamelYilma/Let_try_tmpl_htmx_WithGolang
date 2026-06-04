@@ -1,21 +1,21 @@
 package view
 
-templ inputbox(){
-    <div class="">
-        <form 
-        hx-post="/add"  
-        id="inpt-box"
-        hx-trigger="submit"
-        hx-target="#list-container"
-        hx-swap="innerHTML" >
-        
-            <input 
-            type="text" 
-            placeholder="Type here..." 
-            id="inpt" 
-            name="user-input"  />
-
-            <button type="submit">ADD</button>
-        </form>
-    </div>
+templ inputbox() {
+	<div class="">
+		<form
+			hx-post="/add"
+			id="inpt-box"
+			hx-trigger="submit"
+			hx-target="#list-container"
+			hx-swap="innerHTML"
+		>
+			<input
+				type="text"
+				placeholder="Type here..."
+				id="inpt"
+				name="user-input"
+			/>
+			<button type="submit">ADD</button>
+		</form>
+	</div>
 }
