@@ -8,9 +8,7 @@ package view
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import (
-	"gootmplhtmx/model"
-)
+import "gootmplhtmx/model"
 
 func Fulpage(title string, task []model.TASK) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
@@ -38,6 +36,10 @@ func Fulpage(title string, task []model.TASK) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		templ_7745c5c3_Err = header(title).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = style().Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
