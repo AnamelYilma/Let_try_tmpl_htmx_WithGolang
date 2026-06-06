@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"gootmplhtmx/model"
+
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -16,7 +17,7 @@ func DbLoad() (*gorm.DB, error) {
 	var task model.TASK
 	dsn := fmt.Sprintf(
 		"host=%s user=%s password=%s dbname=%s port=%s sslmode=%s",
-		envOrDefault("DB_HOST", "localhost"),
+		envOrDefault("DB_HOST", "host.docker.internal"),
 		envOrDefault("DB_USER", "postgres"),
 		envOrDefault("DB_PASSWORD", "0909"),
 		envOrDefault("DB_NAME", "serverside"),
