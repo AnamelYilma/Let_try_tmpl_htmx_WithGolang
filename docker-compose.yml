@@ -2,8 +2,14 @@ services:
   app:
     build: .
     ports:
-      - "3000:3000"
+      - "4000:4000"
     environment:
+      - APP_PORT=4000
       - DB_HOST=host.docker.internal
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=0909
+      - DB_NAME=serverside
+      - DB_SSLMODE=disable
     extra_hosts:
       - "host.docker.internal:host-gateway"
