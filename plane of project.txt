@@ -1,41 +1,27 @@
-project name : Let_try_tmpl_htmx_WithGolang
-Root path: c:\continer\work\code\Learn Golang\Let_try_tmpl_htmx_WithGolang
+# Use official Go image
+FROM golang:1.21-alpine
 
+# Set working directory
+WORKDIR /app
 
-My project is to make using : templ , htmx, go , gorm , fiber , tailwind
+# Install templ
+RUN go install github.com/a-h/templ/cmd/templ@latest
 
-Templ - Type-safe HTML templates that compile to Go (like JSX but for Go)
-HTMX - For dynamic interactions
-Fiber - Web framework
-GORM - Database ORM
-Tailwind CSS - Styling
-────────────────────────────────────────────────────────────────────────────────
+# Copy go mod files first (for caching)
+COPY go.mod go.sum ./
+RUN go mod download
 
+# Copy all source code
+COPY . .
 
+# Generate templ files
+RUN templ generate
 
-├── Route/
-│   └── Rout.go
-├── database/
-├── view/
-│   ├── compnenet.templ
-│   └── list.templ
-├── .gitattributes
-├── .gitignore
-├── app.templ
-├── go.mod
-├── go.sum
-├── main.go
-├── package-lock.json
-├── package.json
-├── plane of project.txt
-├── tailwind.config.js
-└── tools.go
+# Build the app
+RUN go build -o gootmplhtmx .
 
-────────────────────────────────────────────────────────────────────────────────
+# Expose port (change to your Fiber port)
+EXPOSE 3000
 
-
-Routh
-get / is to take that mean to  display all todod
-post /add is to add and to take full update list
-path /delet is to delete and to updte list that mean by remove that delete
-PATCH /edit is to edit already todo list
+# Run the app
+CMD ["./gootmplhtmx"]
