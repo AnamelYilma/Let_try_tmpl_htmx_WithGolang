@@ -2,39 +2,39 @@ package Route
 
 import (
 	"bytes"
+	// "fmt"
+	"log"
 	"gootmplhtmx/database"
 	"gootmplhtmx/model"
 	"gootmplhtmx/view"
+	"html"
 
 	"github.com/gofiber/fiber/v3"
 	// "golang.org/x/net/html"
 )
 
-/*
-get / is to take that mean to  display all todod
-post /add is to add and to take full update list
-path /delet is to delete and to updte list that mean by remove that delete
-PATCH /edit is to edit already todo list
-*/
-
 func Routing(APP *fiber.App) {
 
 	APP.Get("/", func(c fiber.Ctx) error {
-		var task []model.TASK
-		if err := database.DB.Find(&task).Error; err != nil {
-			return c.Status(500).SendString(err.Error())
-		}
+		var tasks []model.TASK
+		if err := database.DB.Find(&tasks).Error; err != nil {
+			log.Printf("DB Error: %v", err)
+			return c.Status(500).SendString("Database error")
+		}  // ← add this closing brace
+
 		var b bytes.Buffer
-		html := view.Fulpage("todolist", task)
-		if err := html.Render(c.Context(), &b); err != nil {
-			return err
+		component := view.Fulpage("Todo List", tasks)
+
+		if err := component.Render(c.Context(), &b); err != nil {
+			log.Printf("Render Error: %v", err)
+			return c.Status(500).SendString("Error rendering template")
 		}
 		c.Set(fiber.HeaderContentType, fiber.MIMETextHTML)
 		return c.Status(200).SendString(b.String())
 	})
 
 	// Placeholder endpoints so your structure is ready for server-side HTMX updates.
-	
+
 	APP.Post("/add", func(c fiber.Ctx) error {
 		var task model.TASK
 		text := c.FormValue("user-input")
@@ -55,31 +55,37 @@ func Routing(APP *fiber.App) {
 		c.Set(fiber.HeaderContentType, fiber.MIMETextHTML)
 		return c.Status(fiber.StatusOK).Send(b.Bytes())
 	})
-	
-	
-	APP.Delete("/delete/:id", func(c fiber.Ctx) error {
-		var task model.TASK
-		id := c.Params("id")
-		database.DB.Delete(&task, id)
-		return c.Status(200).SendString("delet")
 
+	APP.Delete("/delete/:id", func(c fiber.Ctx) error {
+		id := c.Params("id")
+		var task model.TASK
+		if err := database.DB.Delete(&task, id).Error; err != nil {
+			return c.Status(500).SendString(err.Error())
+		}
+		return c.Status(200).SendString("")
 	})
 
-	APP.Patch("/edit/:task", func(c fiber.Ctx) error {
+		APP.Patch("/edit/:id", func(c fiber.Ctx) error {
+		id := c.Params("id")
+
 		var task model.TASK
-		dbtx := c.Params("tasktx")
-		if err := database.DB.First(&task, "id=?", dbtx).Error; err != nil {
-			return c.Status(fiber.StatusNotFound).SendString("not found for edit")
-		}
-		if err := database.DB.Delete(&task).Error; err != nil {
-			return c.Status(fiber.StatusNotFound).SendString("Can't update")
+		if err := database.DB.First(&task, "id = ?", id).Error; err != nil {
+			return c.Status(404).SendString("not found")
 		}
 
-		return c.SendString(`
-				<input type="text" placeholder="Type here..." id="inpt" name="user-input" value="` + task.Tasktx + `"  />
 		
+		c.Set(fiber.HeaderContentType, fiber.MIMETextHTML)
+		return c.Status(200).SendString(`
+			<div class="todoList todoList--edit">
+				<div class="todoListI todoListI--edit">
+					<div class="taskMeta">Editing task #` + id + `</div>
+					<input type="text" class="editInput" name="user-input" value="` + html.EscapeString(task.Tasktx) + `" />
+				</div>
+				<div class="todoListO todoListO--edit">
+					<button class="btnO" hx-get="/" hx-target="#list-container" hx-swap="innerHTML">Cancel</button>
+				</div>
+			</div>
 		`)
-
 	})
 
 }
