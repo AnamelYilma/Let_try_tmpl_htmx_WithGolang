@@ -1,0 +1,11 @@
+# start-db.ps1
+docker run -d `
+  --name my-postgres `
+  -e POSTGRES_USER=myuser `
+  -e POSTGRES_PASSWORD=mypass `
+  -e POSTGRES_DB=mydb `
+  -p 5432:5432 `
+  postgres:15
+
+Write-Host "PostgreSQL running on localhost:5432"
+Write-Host "User: myuser, Password: mypass, Database: mydb"
