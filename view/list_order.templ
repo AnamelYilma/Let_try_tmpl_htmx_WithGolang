@@ -1,0 +1,49 @@
+package view
+
+import (
+    "fmt"
+
+    "gootmplhtmx/model"
+)
+
+templ Listing(tasks []model.TASK) {
+    <div>
+        <div>
+            if len(tasks) == 0 {
+                <div class="todoList">
+                    <label>empty</label>
+                </div>
+            } else {
+                for _, task := range tasks {
+                    <div class="todoList">
+                        <div class="todoListI">
+                            <input type="checkbox" class="checkbox1" id={ fmt.Sprintf("checkbox-%d", task.ID) }/>
+                            <label for={ fmt.Sprintf("checkbox-%d", task.ID) }>{ task.Tasktx }</label>
+                        </div>
+                        <div class="todoListO">
+                            <button
+                                hx-delete={ "/delete/" + fmt.Sprint(task.ID) }
+                                hx-target="closest .todoList"
+                                hx-swap="outerHTML"
+                                hx-confirm="Delete this task?"
+                                class="btnO"
+                            >
+                                Delete
+                            </button>
+                            <button
+                            
+                                hx-patch={ "/edit/" + fmt.Sprint(task.ID) }
+                                hx-target="closest .todoList"
+                                hx-swap="outerHTML"
+                                class="btnO"
+                            >
+                                Edit
+                            </button>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+}
+
