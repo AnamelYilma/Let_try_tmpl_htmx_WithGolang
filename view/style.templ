@@ -1,0 +1,142 @@
+package view
+
+templ style() {
+	<style>
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
+		body {
+			padding: 30px;
+			background: #efb9b92b;
+		}
+		:root {
+			--input-bg: #e6e6e6aa;
+			--card-width: 360px;
+		}
+		.container {
+			width: 100dvw;
+			height: 100dvh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.in-container {
+			display: flex;
+			flex-direction: column;
+			gap: 8px;
+			width: var(--card-width);
+		}
+
+		/* input box */
+		#inpt-box {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			width: var(--card-width);
+			height: 50px;
+			background-color: var(--input-bg);
+			font-size: large;
+			padding-left: 20px;
+			padding-right: 0px;
+			border-radius: 10px;
+		}
+		#inpt {
+			flex: 1;
+			color: rgb(0, 0, 0);
+			background-color: transparent;
+			border: none;
+			outline: none;
+			font-size: 1rem;
+		}
+		#inpt-box button {
+			height: 50px;
+			width: 68px;
+			border-radius: 10px;
+			background-color: rgba(37, 37, 255, 0.781);
+			color: white;
+			cursor: pointer;
+			flex-shrink: 0;
+		}
+
+		/* task card */
+		.todoList {
+			display: flex;
+			align-items: flex-start;
+			gap: 10px;
+			border: solid 2px rgba(0, 0, 0, 0.23);
+			padding: 10px 12px;
+			width: var(--card-width);
+			border-radius: 8px;
+			background: white;
+		}
+		.todoListI {
+			display: flex;
+			align-items: flex-start;
+			gap: 8px;
+			flex: 1;
+			min-width: 0;
+		}
+		.todoListI label {
+			word-break: break-word;
+			line-height: 1.4;
+			cursor: pointer;
+		}
+		.checkbox1 {
+			margin-top: 3px;
+			flex-shrink: 0;
+			cursor: pointer;
+		}
+
+		/* action buttons */
+		.todoListO {
+			display: flex;
+			flex-direction: column;
+			gap: 5px;
+			flex-shrink: 0;
+		}
+		.btnO {
+			background-color: rgba(156, 13, 13, 0.451);
+			padding: 4px 12px;
+			border-radius: 5px;
+			cursor: pointer;
+			font-size: 0.85rem;
+			white-space: nowrap;
+			transition: transform 0.15s ease, filter 0.15s ease, background-color 0.15s ease;
+		}
+		.btnO:hover {
+			background-color: rgba(156, 13, 13, 0.7);
+			transform: translateY(-1px);
+			filter: brightness(1.05);
+		}
+
+		/* inline edit state */
+		.todoList--edit {
+			background: rgba(255, 255, 255, 0.72);
+		}
+		.todoListI--edit {
+			flex-direction: column;
+			width: 100%;
+		}
+		.taskMeta {
+			font-size: 0.85rem;
+			color: rgba(0, 0, 0, 0.62);
+		}
+		.editInput {
+			width: 100%;
+			border: 1px solid rgba(0, 0, 0, 0.18);
+			border-radius: 8px;
+			padding: 10px 12px;
+			background: rgba(255, 255, 255, 0.92);
+			outline: none;
+		}
+		.editInput:focus {
+			border-color: rgba(37, 37, 255, 0.78);
+			box-shadow: 0 0 0 3px rgba(37, 37, 255, 0.12);
+		}
+		.todoListO--edit {
+			align-items: flex-start;
+		}
+	</style>
+}
